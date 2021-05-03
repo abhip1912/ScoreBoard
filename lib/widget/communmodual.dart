@@ -19,7 +19,7 @@ IconButton buildIconButton() {
                 title: Text('Light Theam'),
                 onTap: () {
                   print('light theam');
-                  Get.changeTheme(ThemeData.light());
+                  Get.changeThemeMode(ThemeMode.light);
                 },
               ),
               ListTile(
@@ -27,7 +27,7 @@ IconButton buildIconButton() {
                 title: Text('Dark Theam'),
                 onTap: () {
                   print('darth theam');
-                  Get.changeTheme(ThemeData.dark());
+                  Get.changeThemeMode(ThemeMode.dark);
                 },
               ),
             ],
