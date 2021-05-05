@@ -37,3 +37,30 @@ IconButton buildIconButton() {
     },
   );
 }
+
+final bottomStyle = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+);
+
+final nameTextFieldDecoration = InputDecoration(
+    border: OutlineInputBorder(),
+    hintText: "Enter Your Name",
+    labelText: "Name");
+
+final nameTextFieldTextStyle = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
+final nameTextFieldTheamData = ThemeData(
+  primaryColor: Colors.black87,
+  primaryColorDark: Colors.teal,
+);
+
+final bottomSheetDecoration = BoxDecoration(
+  color: Colors.blue,
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(30),
+    topRight: Radius.circular(30),
+  ),
+);

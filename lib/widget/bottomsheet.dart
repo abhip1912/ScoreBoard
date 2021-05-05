@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+import 'package:scorebord/page/home/homecontroller.dart';
+import 'package:scorebord/page/model/model.dart';
+import 'package:scorebord/widget/communmodual.dart';
 
 class BottomShit extends StatelessWidget {
-  TextEditingController nameConroller;
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.find<HomeController>();
+
     return Container(
-      margin: EdgeInsets.only(
-        left: 5,
-        right: 5,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
+      margin: EdgeInsets.only(left: 5, right: 5),
+      decoration: bottomSheetDecoration,
       height: 300,
       child: Column(
         children: [
@@ -38,27 +34,26 @@ class BottomShit extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: TextFormField(
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                  keyboardType: TextInputType.text,
-                  controller: nameConroller,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      hintText: "Enter Your Name",
-                      labelText: "Name"),
+                child: Theme(
+                  data: nameTextFieldTheamData,
+                  child: TextFormField(
+                    style: nameTextFieldTextStyle,
+                    keyboardType: TextInputType.text,
+                    controller: homeController.nameConroller,
+                    decoration: nameTextFieldDecoration,
+                  ),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.back(result: homeController.addName());
+                  homeController.nameConroller.clear();
+                },
                 child: Text('Create'),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
-                ),
+                style: bottomStyle,
               )
             ],
           ),
