@@ -20,7 +20,13 @@ class Home extends StatelessWidget {
                 BottomShit(),
                 isDismissible: false,
                 enableDrag: true,
-              ).then((value) => homeController.userList.add(value));
+              ).then(
+                (value) {
+                  if (value != null) {
+                    homeController.userList.add(value);
+                  }
+                },
+              );
             }),
         title: Text(
           'ScoreBorad',
@@ -58,6 +64,7 @@ class Home extends StatelessWidget {
                             Column(
                               children: [
                                 Obx(() {
+                                  print(homeController.userList[index].score);
                                   return Container(
                                     width: 120,
                                     child: Text(
@@ -78,7 +85,7 @@ class Home extends StatelessWidget {
                                     iconColor: Colors.white,
                                     icon: Icons.add,
                                     onPressed: () {
-                                      homeController.scorePluse();
+                                      homeController.scorePluse(index);
                                       homeController.scoreController.clear();
                                     }),
                                 Card(
@@ -89,10 +96,7 @@ class Home extends StatelessWidget {
                                     height: 35,
                                     width: 55,
                                     child: TextFormField(
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey),
+                                      style: scoreTextfieldStyle,
                                       controller:
                                           homeController.scoreController,
                                       keyboardType: TextInputType.number,
@@ -104,7 +108,7 @@ class Home extends StatelessWidget {
                                     iconColor: Colors.white,
                                     icon: Icons.remove,
                                     onPressed: () {
-                                      homeController.scoreMinus();
+                                      homeController.scoreMinus(index);
                                       homeController.scoreController.clear();
                                     }),
                               ],

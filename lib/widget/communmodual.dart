@@ -64,3 +64,6 @@ final bottomSheetDecoration = BoxDecoration(
     topRight: Radius.circular(30),
   ),
 );
+
+final scoreTextfieldStyle =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey);

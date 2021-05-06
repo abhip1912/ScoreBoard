@@ -30,33 +30,32 @@ class HomeController extends GetxController {
     if (nameConroller.text.isNotEmpty) {
       return user = UserModel(
         name: nameConroller.text,
-        score: int.parse(score.value),
+        score: score,
       );
-
-      print('after $userList');
+    } else {
+      return user;
     }
   }
 
-  void scorePluse() {
+  scorePluse(int index) {
     if (scoreController.text.isNotEmpty) {
-      int temp1 = int.parse(score.value);
+      int temp1 = int.parse(userList[index].score.toString());
       int temp2 = int.parse(scoreController.text);
-      print(score.value);
-      print(scoreController.text);
-      score.value = (temp1 + temp2).toString();
+      print('after');
+      print(userList[index].score);
+      temp1 = (temp1 + temp2);
+      userList[index].score.value = temp1.toString();
     }
-    // print('20' + '$score');
   }
 
-  void scoreMinus() {
+  void scoreMinus(int index) {
     if (scoreController.text.isNotEmpty) {
-      int temp1 = int.parse(score.value);
+      int temp1 = int.parse(userList[index].score.toString());
       int temp2 = int.parse(scoreController.text);
-      print(score.value);
-      print(scoreController.text);
-      score.value = (temp1 - temp2).toString();
+      print('after');
+      print(userList[index].score);
+      temp1 = (temp1 - temp2);
+      userList[index].score.value = temp1.toString();
     }
-
-    print('$score');
   }
 }
