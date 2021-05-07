@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:scorebord/page/model/model.dart';
 
 class HomeController extends GetxController {
-  TextEditingController nameConroller, scoreController;
+  TextEditingController nameController;
+  // TextEditingController scoreController;
   var name = 'Add vlaue'.obs;
   var score = '0'.obs;
   UserModel user;
@@ -13,45 +14,52 @@ class HomeController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    nameConroller = TextEditingController();
-    scoreController = TextEditingController();
+    nameController = TextEditingController();
+    // scoreController = TextEditingController();
   }
 
   @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();
-    nameConroller.dispose();
-    scoreController.dispose();
+    nameController.dispose();
+    // scoreController.dispose();
   }
 
   UserModel addName() {
     print('before $userList');
-    if (nameConroller.text.isNotEmpty) {
+    if (nameController.text.isNotEmpty) {
       return user = UserModel(
-        name: nameConroller.text,
+        name: nameController.text,
         score: score,
+        scoreController: TextEditingController(),
       );
     } else {
-      return user;
+      return null;
     }
   }
 
   scorePluse(int index) {
-    if (scoreController.text.isNotEmpty) {
+    print(userList[index].scoreController.text);
+    if (userList[index].scoreController.text.isNotEmpty) {
       int temp1 = int.parse(userList[index].score.toString());
-      int temp2 = int.parse(scoreController.text);
+      int temp2 = int.parse(userList[index].scoreController.text);
       print('after');
       print(userList[index].score);
       temp1 = (temp1 + temp2);
+      print(temp1);
       userList[index].score.value = temp1.toString();
+      print('0 vale is ');
+      print('1 valur is ');
+      print(userList[1].score.value);
     }
   }
 
   void scoreMinus(int index) {
-    if (scoreController.text.isNotEmpty) {
+    print(userList[index].scoreController.text);
+    if (userList[index].scoreController.text.isNotEmpty) {
       int temp1 = int.parse(userList[index].score.toString());
-      int temp2 = int.parse(scoreController.text);
+      int temp2 = int.parse(userList[index].scoreController.text);
       print('after');
       print(userList[index].score);
       temp1 = (temp1 - temp2);

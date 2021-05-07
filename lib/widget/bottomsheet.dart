@@ -39,7 +39,7 @@ class BottomShit extends StatelessWidget {
                   child: TextFormField(
                     style: nameTextFieldTextStyle,
                     keyboardType: TextInputType.text,
-                    controller: homeController.nameConroller,
+                    controller: homeController.nameController,
                     decoration: nameTextFieldDecoration,
                   ),
                 ),
@@ -50,7 +50,7 @@ class BottomShit extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Get.back(result: homeController.addName());
-                  homeController.nameConroller.clear();
+                  homeController.nameController.clear();
                 },
                 child: Text('Create'),
                 style: bottomStyle,

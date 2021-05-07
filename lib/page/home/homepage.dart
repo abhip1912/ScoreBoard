@@ -86,7 +86,9 @@ class Home extends StatelessWidget {
                                     icon: Icons.add,
                                     onPressed: () {
                                       homeController.scorePluse(index);
-                                      homeController.scoreController.clear();
+                                      homeController
+                                          .userList[index].scoreController
+                                          .clear();
                                     }),
                                 Card(
                                   elevation: 4,
@@ -97,8 +99,8 @@ class Home extends StatelessWidget {
                                     width: 55,
                                     child: TextFormField(
                                       style: scoreTextfieldStyle,
-                                      controller:
-                                          homeController.scoreController,
+                                      controller: homeController
+                                          .userList[index].scoreController,
                                       keyboardType: TextInputType.number,
                                     ),
                                   ),
@@ -109,7 +111,9 @@ class Home extends StatelessWidget {
                                     icon: Icons.remove,
                                     onPressed: () {
                                       homeController.scoreMinus(index);
-                                      homeController.scoreController.clear();
+                                      homeController
+                                          .userList[index].scoreController
+                                          .clear();
                                     }),
                               ],
                             )
