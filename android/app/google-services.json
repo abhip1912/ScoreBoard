@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701600679216",
+    "project_id": "scoreboard-3364e",
+    "storage_bucket": "scoreboard-3364e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701600679216:android:a6ca02a18d5bb36fd274f5",
+        "android_client_info": {
+          "package_name": "com.JoFlee.scorebord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701600679216-9r6p84dmqda8b4ghaabl9fj6htei21s4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1KlR2VZtJjQSJZoP_x2mQJld7D6-WMb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701600679216-9r6p84dmqda8b4ghaabl9fj6htei21s4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

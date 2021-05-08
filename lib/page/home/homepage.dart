@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scorebord/page/home/homebinding.dart';
 import 'package:scorebord/page/home/homecontroller.dart';
 import 'package:scorebord/widget/roundIconButton.dart';
 import 'package:scorebord/widget/bottomsheet.dart';
@@ -64,7 +63,6 @@ class Home extends StatelessWidget {
                             Column(
                               children: [
                                 Obx(() {
-                                  print(homeController.userList[index].score);
                                   return Container(
                                     width: 120,
                                     child: Text(

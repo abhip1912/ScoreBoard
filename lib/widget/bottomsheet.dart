@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:scorebord/page/home/homecontroller.dart';
-import 'package:scorebord/page/model/model.dart';
 import 'package:scorebord/widget/communmodual.dart';
 
 class BottomShit extends StatelessWidget {

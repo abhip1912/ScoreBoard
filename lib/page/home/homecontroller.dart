@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scorebord/page/model/model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeController extends GetxController {
   TextEditingController nameController;
-  // TextEditingController scoreController;
   var name = 'Add vlaue'.obs;
-  var score = '0'.obs;
   UserModel user;
   var userList = <UserModel>[].obs;
+  final _firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     nameController = TextEditingController();
-    // scoreController = TextEditingController();
   }
 
   @override
@@ -23,47 +22,54 @@ class HomeController extends GetxController {
     // TODO: implement onClose
     super.onClose();
     nameController.dispose();
-    // scoreController.dispose();
   }
 
   UserModel addName() {
     print('before $userList');
     if (nameController.text.isNotEmpty) {
-      return user = UserModel(
+      user = UserModel(
         name: nameController.text,
-        score: score,
+        score: '0',
         scoreController: TextEditingController(),
       );
+      addData();
+      return user;
     } else {
       return null;
     }
   }
 
+  void addData() {
+    _firestore.collection('data').add(user.toJson());
+  }
+
+  void getData() {
+    _firestore.collection('data').snapshots();
+  }
+
   scorePluse(int index) {
-    print(userList[index].scoreController.text);
     if (userList[index].scoreController.text.isNotEmpty) {
-      int temp1 = int.parse(userList[index].score.toString());
+      int temp1 = int.parse(userList[index].score);
       int temp2 = int.parse(userList[index].scoreController.text);
-      print('after');
-      print(userList[index].score);
       temp1 = (temp1 + temp2);
-      print(temp1);
-      userList[index].score.value = temp1.toString();
-      print('0 vale is ');
-      print('1 valur is ');
-      print(userList[1].score.value);
+      user = UserModel(
+          name: userList[index].name,
+          score: temp1.toString(),
+          scoreController: userList[index].scoreController);
+      userList[index] = user;
     }
   }
 
   void scoreMinus(int index) {
-    print(userList[index].scoreController.text);
     if (userList[index].scoreController.text.isNotEmpty) {
-      int temp1 = int.parse(userList[index].score.toString());
+      int temp1 = int.parse(userList[index].score);
       int temp2 = int.parse(userList[index].scoreController.text);
-      print('after');
-      print(userList[index].score);
       temp1 = (temp1 - temp2);
-      userList[index].score.value = temp1.toString();
+      user = UserModel(
+          name: userList[index].name,
+          score: temp1.toString(),
+          scoreController: userList[index].scoreController);
+      userList[index] = user;
     }
   }
 }
