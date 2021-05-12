@@ -8,13 +8,15 @@ class HomeController extends GetxController {
   var name = 'Add vlaue'.obs;
   UserModel user;
   var userList = <UserModel>[].obs;
-  final _firestore = FirebaseFirestore.instance;
+  var list = <UserModel>[].obs;
+  final firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     nameController = TextEditingController();
+    // demo();
   }
 
   @override
@@ -32,22 +34,38 @@ class HomeController extends GetxController {
         score: '0',
         scoreController: TextEditingController(),
       );
+      // userList.add(user);
       addData();
-      return user;
+      // return user;
     } else {
       return null;
     }
   }
 
   void addData() {
-    _firestore.collection('data').add(user.toJson());
+    firestore.collection('data').add(user.toJson());
   }
 
-  void getData() {
-    _firestore.collection('data').snapshots();
-  }
+  // Stream getData() {
+  //   final data = firestore.collection('data').snapshots();
+  //   return data;
+  // }
+
+  // Future<void> demo() async {
+  //   final data = await firestore.collection('data').get().then((value) {
+  //     value.docs.forEach((element) {
+  //       final user = UserModel(
+  //         name: element.data()['name'],
+  //         score: element.data()['score'],
+  //       );
+  //       userList.clear();
+  //       userList.add(user);
+  //     });
+  //   });
+  // }
 
   scorePluse(int index) {
+    print(userList[index].scoreController.text);
     if (userList[index].scoreController.text.isNotEmpty) {
       int temp1 = int.parse(userList[index].score);
       int temp2 = int.parse(userList[index].scoreController.text);
