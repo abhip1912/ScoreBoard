@@ -8,13 +8,13 @@ class HomeController extends GetxController {
   var name = 'Add vlaue'.obs;
   UserModel user;
   var userList = <UserModel>[].obs;
-  var list = <UserModel>[].obs;
   final firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    print('init is called.');
     nameController = TextEditingController();
     // demo();
   }
@@ -35,14 +35,14 @@ class HomeController extends GetxController {
         scoreController: TextEditingController(),
       );
       // userList.add(user);
-      addData();
-      // return user;
+
+      return user;
     } else {
       return null;
     }
   }
 
-  void addData() {
+  void addData(dynamic user) {
     firestore.collection('data').add(user.toJson());
   }
 

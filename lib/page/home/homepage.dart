@@ -24,7 +24,8 @@ class Home extends StatelessWidget {
               ).then(
                 (value) {
                   if (value != null) {
-                    homeController.userList.add(value);
+                    // homeController.userList.add(value);
+                    homeController.addData(value);
                   }
                 },
               );
@@ -35,50 +36,21 @@ class Home extends StatelessWidget {
         centerTitle: true,
         actions: [buildIconButton()],
       ),
-      body:
-          // StreamBuilder(
-          //   stream: homeController.getData(),
-          //   builder: (context, snapshot) {
-          //     if (!snapshot.hasData) {
-          //       return Center(
-          //         child: CircularProgressIndicator(
-          //           backgroundColor: Colors.lightBlueAccent,
-          //         ),
-          //       );
-          //     }
-          //     final members = snapshot.data.docs;
-          //     for (var member in members) {
-          //       final userName = member.data()['name'];
-          //       final userScore = member.data()['score'];
-          //       final user = UserModel(
-          //           name: userName,
-          //           score: userScore,
-          //           scoreController: TextEditingController());
-          //       homeController.userList.add(user);
-          //     }
-          //     return Obx(() {
-          //       return ListView.builder(
-          //           itemCount: homeController.userList.length,
-          //           itemBuilder: (context, index) {
-          //             return                 });
-          //     });
-          //     //
-          //   },
-          // ),
-          FutureBuilder(
+      body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('data').get(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
+            final List<UserModel> list = [];
             snapshot.data.docs.forEach((element) {
               final user = UserModel(
                 name: element.data()['name'],
                 score: element.data()['score'],
               );
 
-              homeController.list.add(user);
+              list.add(user);
             });
 
-            homeController.userList = homeController.list;
+            homeController.userList.value = list;
             print(homeController.userList);
             return Obx(() {
               return ListView.builder(
