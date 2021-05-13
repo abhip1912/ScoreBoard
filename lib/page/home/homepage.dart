@@ -36,19 +36,11 @@ class Home extends StatelessWidget {
         centerTitle: true,
         actions: [buildIconButton()],
       ),
-      body: FutureBuilder(
-        future: FirebaseFirestore.instance.collection('data').get(),
+      body: StreamBuilder(
+        stream: homeController.getData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            final List<UserModel> list = [];
-            snapshot.data.docs.forEach((element) {
-              final user = UserModel(
-                name: element.data()['name'],
-                score: element.data()['score'],
-              );
-
-              list.add(user);
-            });
+            var list = homeController.logic(snapshot);
 
             homeController.userList.value = list;
             print(homeController.userList);

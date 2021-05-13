@@ -16,6 +16,8 @@ class HomeController extends GetxController {
     super.onInit();
     print('init is called.');
     nameController = TextEditingController();
+    // var u = UserModel(name: 'jenish', score: '20');
+    // print(firestore.collection('data').doc('a').update(u.toJson()));
     // demo();
   }
 
@@ -34,7 +36,6 @@ class HomeController extends GetxController {
         score: '0',
         scoreController: TextEditingController(),
       );
-      // userList.add(user);
 
       return user;
     } else {
@@ -43,26 +44,29 @@ class HomeController extends GetxController {
   }
 
   void addData(dynamic user) {
-    firestore.collection('data').add(user.toJson());
+    // firestore.collection('data').add(user.toJson());
+
+    firestore.collection('data').doc('${user.name}').set(user.toJson());
   }
 
-  // Stream getData() {
-  //   final data = firestore.collection('data').snapshots();
-  //   return data;
-  // }
+  Stream getData() {
+    final data = firestore.collection('data').snapshots();
+    return data;
+  }
 
-  // Future<void> demo() async {
-  //   final data = await firestore.collection('data').get().then((value) {
-  //     value.docs.forEach((element) {
-  //       final user = UserModel(
-  //         name: element.data()['name'],
-  //         score: element.data()['score'],
-  //       );
-  //       userList.clear();
-  //       userList.add(user);
-  //     });
-  //   });
-  // }
+  List<UserModel> logic(AsyncSnapshot snapshot) {
+    final List<UserModel> list = [];
+    snapshot.data.docs.forEach((element) {
+      final user = UserModel(
+        name: element.data()['name'],
+        score: element.data()['score'],
+        scoreController: TextEditingController(),
+      );
+
+      list.add(user);
+    });
+    return list;
+  }
 
   scorePluse(int index) {
     print(userList[index].scoreController.text);
@@ -74,7 +78,12 @@ class HomeController extends GetxController {
           name: userList[index].name,
           score: temp1.toString(),
           scoreController: userList[index].scoreController);
-      userList[index] = user;
+
+      firestore
+          .collection('data')
+          .doc('${userList[index].name}')
+          .update(user.toJson());
+      // userList[index] = user;
     }
   }
 
@@ -87,7 +96,12 @@ class HomeController extends GetxController {
           name: userList[index].name,
           score: temp1.toString(),
           scoreController: userList[index].scoreController);
-      userList[index] = user;
+      // userList[index] = user;
+
+      firestore
+          .collection('data')
+          .doc('${userList[index].name}')
+          .update(user.toJson());
     }
   }
 }
