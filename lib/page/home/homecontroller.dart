@@ -5,25 +5,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeController extends GetxController {
   TextEditingController nameController;
-  var name = 'Add vlaue'.obs;
   UserModel user;
   var userList = <UserModel>[].obs;
   final firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     print('init is called.');
     nameController = TextEditingController();
-    // var u = UserModel(name: 'jenish', score: '20');
-    // print(firestore.collection('data').doc('a').update(u.toJson()));
-    // demo();
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     nameController.dispose();
   }
@@ -44,8 +38,6 @@ class HomeController extends GetxController {
   }
 
   void addData(dynamic user) {
-    // firestore.collection('data').add(user.toJson());
-
     firestore.collection('data').doc('${user.name}').set(user.toJson());
   }
 
@@ -62,10 +54,13 @@ class HomeController extends GetxController {
         score: element.data()['score'],
         scoreController: TextEditingController(),
       );
-
       list.add(user);
     });
     return list;
+  }
+
+  void remove(int index) {
+    firestore.collection('data').doc('${userList[index].name}').delete();
   }
 
   scorePluse(int index) {
@@ -83,7 +78,6 @@ class HomeController extends GetxController {
           .collection('data')
           .doc('${userList[index].name}')
           .update(user.toJson());
-      // userList[index] = user;
     }
   }
 
@@ -96,7 +90,6 @@ class HomeController extends GetxController {
           name: userList[index].name,
           score: temp1.toString(),
           scoreController: userList[index].scoreController);
-      // userList[index] = user;
 
       firestore
           .collection('data')

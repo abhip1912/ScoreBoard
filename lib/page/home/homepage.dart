@@ -24,7 +24,6 @@ class Home extends StatelessWidget {
               ).then(
                 (value) {
                   if (value != null) {
-                    // homeController.userList.add(value);
                     homeController.addData(value);
                   }
                 },
@@ -50,18 +49,35 @@ class Home extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ReusableCard(
                           colour: Colors.blue,
                           cardChild: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Name : ${homeController.userList[index].name}',
-                                style: TextStyle(fontSize: 25),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Name : ${homeController.userList[index].name}',
+                                    style: TextStyle(fontSize: 25),
+                                  ),
+                                  IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.black54,
+                                      ),
+                                      onPressed: () {
+                                        homeController.remove(index);
+                                        print('after removing list');
+                                        print(homeController.userList);
+                                      })
+                                ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 0,
                                 width: 10000,
                                 child: Divider(
                                   height: 10,
@@ -70,22 +86,18 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
                                       Obx(() {
-                                        return Container(
-                                          width: 120,
-                                          child: Text(
-                                            'Score : ${homeController.userList[index].score} ',
-                                            style: TextStyle(fontSize: 22),
-                                          ),
+                                        return Text(
+                                          'Score : ${homeController.userList[index].score} ',
+                                          style: TextStyle(fontSize: 22),
                                         );
                                       })
                                     ],
-                                  ),
-                                  SizedBox(
-                                    width: 70,
                                   ),
                                   Row(
                                     children: [
@@ -114,6 +126,9 @@ class Home extends StatelessWidget {
                                             controller: homeController
                                                 .userList[index]
                                                 .scoreController,
+                                            maxLength: 3,
+                                            decoration: InputDecoration(
+                                                counterText: ''),
                                             keyboardType: TextInputType.number,
                                           ),
                                         ),
