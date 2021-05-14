@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scorebord/widget/constant.dart';
 
 IconButton buildIconButton() {
   return IconButton(
@@ -20,6 +21,7 @@ IconButton buildIconButton() {
                 onTap: () {
                   print('light theam');
                   Get.changeThemeMode(ThemeMode.light);
+                  Constants.prefs.setBool('isLight', true);
                 },
               ),
               ListTile(
@@ -28,6 +30,7 @@ IconButton buildIconButton() {
                 onTap: () {
                   print('darth theam');
                   Get.changeThemeMode(ThemeMode.dark);
+                  Constants.prefs.setBool('isLight', false);
                 },
               ),
             ],

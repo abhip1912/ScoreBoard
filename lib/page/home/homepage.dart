@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scorebord/page/home/homecontroller.dart';
-import 'package:scorebord/page/model/model.dart';
 import 'package:scorebord/widget/roundIconButton.dart';
 import 'package:scorebord/widget/bottomsheet.dart';
 import 'package:scorebord/widget/communmodual.dart';

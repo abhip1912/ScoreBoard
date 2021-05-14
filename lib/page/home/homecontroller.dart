@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scorebord/page/model/model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   TextEditingController nameController;
   UserModel user;
   var userList = <UserModel>[].obs;
   final firestore = FirebaseFirestore.instance;
+  bool isLightTheam = true;
 
   @override
   void onInit() {
