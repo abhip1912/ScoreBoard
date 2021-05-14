@@ -20,11 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: Constants.prefs.getBool("isLight") == true
-          ? ThemeData.light()
-          : ThemeData.dark(),
+      theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.light,
+      themeMode: Constants.prefs.getBool("isLight") == true
+          ? ThemeMode.light
+          : ThemeMode.dark,
       initialRoute: 'Home',
       getPages: [
         GetPage(name: 'Home', page: () => Home(), binding: HomeBinding())
